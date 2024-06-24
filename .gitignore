@@ -10,7 +10,7 @@ logs
 Thumbs.db
 
 # Environment variables
-.env
+*.env
 
 # Dependency directories
 /.pnp
@@ -35,3 +35,4 @@ Thumbs.db
 
 # Mac files
 *.DS_Store
+.config.env
