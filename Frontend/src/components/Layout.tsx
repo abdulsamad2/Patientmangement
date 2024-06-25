@@ -49,9 +49,9 @@ const navItem = [
 ];
 export function Layout({ children }: layoutProps) {
   return (
-    <div className="grid min-h-screen  w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="hidden   border-r bg-muted/40 md:block">
-        <div className="flex h-full max-h-screen flex-col gap-2">
+    <div className="grid min-h-screen  sticky top-0  w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="hidden sticky top-0  border-r bg-muted/40 md:block ">
+        <div className="flex sticky top-0 h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Package2 className="h-6 w-6" />
@@ -94,8 +94,9 @@ export function Layout({ children }: layoutProps) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+      
+      <div className="flex  flex-col">
+        <header className="flex h-14 sticky top-0 z-40 items-center gap-4 border-b bg-muted px-4 lg:h-[60px] lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -173,7 +174,7 @@ export function Layout({ children }: layoutProps) {
               </div>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
+          <div className="w-full sticky top-0 flex-1">
             <form>
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
