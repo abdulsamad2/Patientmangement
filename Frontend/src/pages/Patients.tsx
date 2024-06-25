@@ -64,8 +64,13 @@ import {
   TooltipTrigger,
 } from "../components/ui/tooltip";
 import { Layout } from "../components/Layout";
+import { useContext } from "react";
+import { AuthContext } from "../store/authContext";
 
 export function Patients() {
+  const { isAuthenticated, accessToken } = useContext(AuthContext);
+  console.log(isAuthenticated, accessToken);
+
   return (
     <Layout>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
