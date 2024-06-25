@@ -1,13 +1,7 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { AuthContext } from "../store/authContext";
-import { useContext } from "react";
+import React from 'react'
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export async function loadData (endPoint: any, options = {}, token = null) {
+export const LoadData = async (endPoint, options = {}, token = null) => {
+ 
 
 
   try {

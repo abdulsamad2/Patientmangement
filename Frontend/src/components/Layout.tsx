@@ -31,7 +31,8 @@ import {
 } from "./ui/dropdown-menu";
 import { Input } from "./ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { AuthContext } from "../store/authContext";
 interface layoutProps {
   children: ReactNode;
 }
@@ -48,6 +49,7 @@ const navItem = [
   },
 ];
 export function Layout({ children }: layoutProps) {
+  const {logout} = useContext(AuthContext)
   return (
     <div className="grid min-h-screen  sticky top-0  w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden sticky top-0  border-r bg-muted/40 md:block ">
@@ -199,7 +201,7 @@ export function Layout({ children }: layoutProps) {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

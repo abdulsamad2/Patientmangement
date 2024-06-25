@@ -1,4 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
+import { getAuthToken } from "../lib/auth";
+import { redirect } from "react-router-dom";
 
 interface AuthState {
   user: unknown;
@@ -8,31 +10,64 @@ interface AuthState {
   accessToken: string;
 }
 
+// Initial state
 const initialState: AuthState = {
-  user: "" || null,
+  user: null,
   isLoading: false,
   isError: false,
   accessToken: "",
   isAuthenticated: false,
 };
-const AuthContext = createContext(initialState);
+
+// Create AuthContext with initial state
+const AuthContext = createContext<{
+  isAuthenticated: boolean;
+  accessToken: string;
+  isLoading: boolean;
+  login: () => void;
+  logout: () => void;
+}>({
+  isAuthenticated: initialState.isAuthenticated,
+  accessToken: initialState.accessToken,
+  isLoading: initialState.isLoading,
+  login: () => {},
+  logout: () => {},
+});
 
 // Auth Provider component
-interface authProps {
+interface AuthProps {
   children: ReactNode;
 }
 
-const AuthProvider: React.FC<authProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [accessToken, setaccessToken] = useState<string>("");
+const AuthProvider: React.FC<AuthProps> = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialState.isAuthenticated);
+  const [accessToken, setAccessToken] = useState<string>(initialState.accessToken);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
+  
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setaccessToken(token);
-      setIsAuthenticated(true);
-    }
+    const fetchAuthToken = async () => {
+      setIsLoading(true);
+      try {
+        const token = await getAuthToken();
+        if (token) {
+          setAccessToken(token);
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        setIsError(true);
+        setIsAuthenticated(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAuthToken();
   }, []);
+
   // Function to login (for demo purposes, we'll just set isAuthenticated to true)
   const login = () => {
     setIsAuthenticated(true);
@@ -40,11 +75,14 @@ const AuthProvider: React.FC<authProps> = ({ children }) => {
 
   // Function to logout
   const logout = () => {
+    localStorage.removeItem("accessToken");
     setIsAuthenticated(false);
+    setAccessToken("");
+    redirect('/login')
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, accessToken }}>
+    <AuthContext.Provider value={{ isAuthenticated, accessToken, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
