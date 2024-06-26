@@ -11,10 +11,15 @@ function App() {
     <>
       <Router>
         <Routes>
-        <Route path="/" element={<ProtectedRoute element={Dashboard} />} />
-        <Route path="/patients" element={<ProtectedRoute element={Patients} />} />
-        <Route       path="patients/:teamId"
- element={<ProtectedRoute element={PatientDetails}/>}/>
+          <Route path="/" element={<ProtectedRoute element={Dashboard} />} />
+          <Route
+            path="/patients"
+            element={<ProtectedRoute element={Patients} />}
+          />
+          <Route
+            path="patients/:id"
+            element={<ProtectedRoute element={PatientDetails} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
