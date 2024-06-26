@@ -1,9 +1,4 @@
-import {
-  File,
-  ListFilter,
-  MoreHorizontal,
-  PlusCircle,
-} from "lucide-react";
+import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-react";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import {
@@ -47,17 +42,13 @@ export function Patients() {
   const [patients, setPatients] = useState([]);
   const { accessToken } = useContext(AuthContext);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
-      const res = await loadData('patients', {}, accessToken);
-      setPatients(res.data.patients);
+      const res = await loadData("patients", {}, accessToken);
+      setPatients(res?.data.patients);
     };
     fetchData();
   }, []);
-
-
 
   return (
     <Layout>
@@ -88,9 +79,7 @@ export function Patients() {
                   Active
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem>
-                  Archived
-                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -128,7 +117,8 @@ export function Patients() {
                       Address
                     </TableHead>
                     <TableHead className="hidden md:table-cell">
-                      Gender                          </TableHead>
+                      Gender{" "}
+                    </TableHead>
                     <TableHead className="hidden md:table-cell">
                       Registered at
                     </TableHead>
@@ -138,24 +128,22 @@ export function Patients() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {patients.length === 0 ? <p>Loading....</p> : <PatientTable patient={patients} />}
-
-
+                  {patients.length === 0 ? (
+                    <p>Loading....</p>
+                  ) : (
+                    <PatientTable patient={patients} />
+                  )}
                 </TableBody>
               </Table>
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                products
+                Showing <strong>1-10</strong> of <strong>32</strong> products
               </div>
             </CardFooter>
           </Card>
         </TabsContent>
       </Tabs>
-     
-
-
     </Layout>
   );
 }

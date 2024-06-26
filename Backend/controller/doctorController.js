@@ -1,19 +1,8 @@
-const Doctor = require('../model/doctorModel')
-const catchAsync = require('../utils/catchAsync')
+const Doctor = require("../model/doctorModel");
+const factory = require("../utils/factory");
 
-
-exports.createDoctor = catchAsync(async (req,res,next)=>{
-
-
-    const doctor = await Doctor.create({
-      ...req.body
-    })
-
-    res.status(201).json({
-        status :"success",
-        result : doctor.length,
-        data:{
-            doctor
-        }
-    })
-})
+exports.getAllDocs = factory(Doctor).getAllDocs;
+exports.createDoc = factory(Doctor).createDoc;
+exports.getOne = factory(Doctor).getOne;
+exports.updateOne = factory(Doctor).updateOne;
+exports.deleteOne = factory(Doctor).deleteOne;
