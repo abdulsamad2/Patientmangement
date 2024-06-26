@@ -1,6 +1,5 @@
 const Patient = require("../model/patientModel");
 const catchAsync = require("../utils/catchAsync");
-const mongoose = require("mongoose");
 
 exports.createPatient = catchAsync(async (req, res, next) => {
   const {
