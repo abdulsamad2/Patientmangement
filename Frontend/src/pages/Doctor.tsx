@@ -1,4 +1,5 @@
 import { File, ListFilter, PlusCircle } from "lucide-react";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
@@ -29,12 +30,15 @@ import {
   TabsTrigger,
 } from "../components/ui/tabs";
 import { Layout } from "../components/Layout";
-import { Button } from "../components/ui/button";
-import PatientTable from "../components/patientTable";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../store/authContext";
+import DoctorTable from "../components/DoctorTable";
 import { useLoadData } from "../components/hooks";
-export function Patients() {
+import { Link } from "react-router-dom";
+
+export function Docotors() {
   const [data, isLoading, error] = useLoadData(
-    "http://localhost:3000/api/v1/patients"
+    "http://localhost:3000/api/v1/doctors"
   );
 
   if (error) {
@@ -79,18 +83,20 @@ export function Patients() {
                 Export
               </span>
             </Button>
-            <Button size="sm" className="h-8 gap-1">
-              <PlusCircle className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                Add Patient
-              </span>
-            </Button>
+            <Link to="/register-docotor">
+              <Button size="sm" className="h-8 gap-1">
+                <PlusCircle className="h-3.5 w-3.5" />
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  Add Doctors
+                </span>
+              </Button>
+            </Link>
           </div>
         </div>
         <TabsContent value="all">
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle>Patients</CardTitle>
+              <CardTitle>Doctors</CardTitle>
               <CardDescription>
                 Manage your Patients records and view their data.
               </CardDescription>
@@ -122,7 +128,7 @@ export function Patients() {
                   {isLoading ? (
                     <p>Loading....</p>
                   ) : (
-                    <PatientTable patient={data} />
+                    <DoctorTable doctors={data.data} />
                   )}
                 </TableBody>
               </Table>

@@ -5,6 +5,8 @@ import { Register } from "./pages/Register";
 import { Patients } from "./pages/Patients";
 import ProtectedRoute from "./lib/auth";
 import { PatientDetails } from "./pages/PatientDetail";
+import { Docotors } from "./pages/Doctor";
+import RegisterDoctor from "./pages/RegisterDoctor";
 
 function App() {
   return (
@@ -16,9 +18,18 @@ function App() {
             path="/patients"
             element={<ProtectedRoute element={Patients} />}
           />
+
           <Route
             path="patients/:id"
             element={<ProtectedRoute element={PatientDetails} />}
+          />
+          <Route
+            path="/doctors"
+            element={<ProtectedRoute element={Docotors} />}
+          />
+          <Route
+            path="/register-docotor"
+            element={<ProtectedRoute element={RegisterDoctor} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../store/authContext';
-
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../store/authContext";
 
 export function getAuthToken() {
   const token = localStorage.getItem("accessToken");
   return token;
 }
-
-
 
 const ProtectedRoute = ({ element: Component, ...rest }) => {
   const { isAuthenticated, isLoading } = useContext(AuthContext);
@@ -22,4 +19,3 @@ const ProtectedRoute = ({ element: Component, ...rest }) => {
 };
 
 export default ProtectedRoute;
-

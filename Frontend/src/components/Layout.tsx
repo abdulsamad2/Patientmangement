@@ -3,6 +3,7 @@ import {
   Bell,
   CircleUser,
   Home,
+  HospitalIcon,
   LineChart,
   Menu,
   Package,
@@ -47,9 +48,14 @@ const navItem = [
     href: "/patients",
     icon: Users,
   },
+  {
+    title: "Doctors",
+    href: "/doctors",
+    icon: HospitalIcon,
+  },
 ];
 export function Layout({ children }: layoutProps) {
-  const {logout} = useContext(AuthContext)
+  const { logout } = useContext(AuthContext);
   return (
     <div className="grid min-h-screen  sticky top-0  w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden sticky top-0  border-r bg-muted/40 md:block ">
@@ -96,7 +102,7 @@ export function Layout({ children }: layoutProps) {
           </div>
         </div>
       </div>
-      
+
       <div className="flex  flex-col">
         <header className="flex h-14 sticky top-0 z-40 items-center gap-4 border-b bg-muted px-4 lg:h-[60px] lg:px-6">
           <Sheet>

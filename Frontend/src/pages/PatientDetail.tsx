@@ -50,25 +50,16 @@ import {
   TabsTrigger,
 } from "../components/ui/tabs";
 import { Layout } from "../components/Layout";
-import { AuthContext } from "../store/authContext";
-import { useContext, useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
-import { loadData } from "../lib/utils";
+import { useLoadData } from "../components/hooks";
 
 export function PatientDetails() {
   const params = useParams();
+  const url = `http://localhost:3000/api/v1/patients/${params.id}`;
 
-  const [patient, setPatient] = useState([]);
-  const { accessToken } = useContext(AuthContext);
-  const endPoint = `patients/${params.id}`;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await loadData(endPoint, {}, accessToken);
-      setPatient(res?.data?.patient);
-    };
-    fetchData();
-  }, []);
+  const [data, isLoading, error] = useLoadData(url);
+  const patient = data.data;
   return (
     <Layout>
       <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -413,7 +404,7 @@ export function PatientDetails() {
                       <div className="grid gap-3">
                         <div className="font-semibold">Primary Doctor</div>
                         <address className="grid gap-0.5 not-italic text-muted-foreground">
-                          <p>{patient?.primaryDoctor}</p>
+                          <p>{data?.primaryDoctor}</p>
                         </address>
                       </div>
                     </div>
