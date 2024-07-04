@@ -28,8 +28,38 @@ type Inputs = {
 export function DoctorForm() {
   const formSchema = z.object({
     name: z.string().min(2, {
+<<<<<<< HEAD
+=======
+      message: "Username must be at least 3 characters.",
+    }),
+    email: z.string().email( {
+>>>>>>> 043fed7b483c99d3a03cba7b46256ecf2c562449
       message: "Username must be at least 2 characters.",
     }),
+    phone: z.string().min(11,{
+      message:"Please provide correct mobile number"
+    }),
+    gender:z.string({
+      message:"Please Provide correct gender "
+    }),
+    dateOfbirth : z.date({
+      message:"please provide dete of birth"
+    }),
+    address:z.string({
+      message:"please provide a valid address"
+    }),
+    specialtity: z.string({
+      message:"please Provide a valid speciality"
+    }),
+  licenseNumber: z.string({
+    message:"please privde a valid licence number"
+  }),
+  bio:z.string().min(20,{
+    message:"bio must be atleast 20 chracters"
+
+  }
+  )
+
   });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,6 +71,7 @@ export function DoctorForm() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
+<<<<<<< HEAD
     <div className="max-w-screen-sm">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -180,5 +211,71 @@ export function DoctorForm() {
         </form>
       </Form>
     </div>
+=======
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          
+        />
+         <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          
+        />
+         <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone Number</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          
+        />
+         <FormField
+          control={form.control}
+          name="gender"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Gender</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+          
+        />
+        
+
+
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+>>>>>>> 043fed7b483c99d3a03cba7b46256ecf2c562449
   );
 }

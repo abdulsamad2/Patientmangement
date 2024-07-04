@@ -31,6 +31,7 @@ const doctorSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+<<<<<<< HEAD
   specialties: {
     type: String,
     required: true,
@@ -46,6 +47,13 @@ const doctorSchema = new mongoose.Schema({
     required: true,
   },
 
+=======
+  specialties:{
+    type:String
+  },
+
+ 
+>>>>>>> 043fed7b483c99d3a03cba7b46256ecf2c562449
   licenseNumber: {
     type: String,
     required: true,
