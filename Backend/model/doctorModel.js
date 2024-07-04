@@ -31,47 +31,21 @@ const doctorSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  specialties: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  education: [
-    {
-      institution: {
-        type: String,
-        required: true,
-      },
-      degree: {
-        type: String,
-        required: true,
-      },
-      yearOfGraduation: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
-  workExperience: [
-    {
-      hospital: {
-        type: String,
-        required: true,
-      },
-      role: {
-        type: String,
-        required: true,
-      },
-      startDate: {
-        type: Date,
-        required: true,
-      },
-      endDate: {
-        type: Date,
-      },
-    },
-  ],
+  specialties: {
+    type: String,
+    required: true,
+  },
+
+  education: {
+    type: String,
+    required: true,
+  },
+
+  workExperience: {
+    type: String,
+    required: true,
+  },
+
   licenseNumber: {
     type: String,
     required: true,
